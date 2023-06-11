@@ -25,4 +25,12 @@ public class DictionaryReplacerTest {
         assertThat(dictionaryReplacer.replace("$temp$", Map.of("temp", "temporary"))).isEqualTo("temporary");
     }
 
+    @Test
+    void stringContainingMultipleEntriesReplaceAllEntries() {
+        DictionaryReplacer dictionaryReplacer = new DictionaryReplacer();
+        assertThat(dictionaryReplacer.replace("$temp$ here comes the name $name$",
+                Map.of("temp", "temporary", "name", "John Doe"))
+        ).isEqualTo("temporary here comes the name John Doe");
+    }
+
 }
