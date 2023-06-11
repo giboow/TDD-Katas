@@ -10,7 +10,19 @@ public class DictionaryReplacerTest {
     @Test
     void emptyStringWithEmptyDictionaryReturnsEmptyValue() {
         DictionaryReplacer dictionaryReplacer = new DictionaryReplacer();
-        assertThat(dictionaryReplacer.replace("", new HashMap<>())).isEmpty();
+        assertThat(dictionaryReplacer.replace("", Map.of())).isEmpty();
+    }
+
+    @Test
+    void nullStringWithDictionnaryReturnNull() {
+        DictionaryReplacer dictionaryReplacer = new DictionaryReplacer();
+        assertThat(dictionaryReplacer.replace("", Map.of("temp", "temporary"))).isEmpty();
+    }
+
+    @Test
+    void stringContainingOnlyTheDictionaryEntryReplaceEntry() {
+        DictionaryReplacer dictionaryReplacer = new DictionaryReplacer();
+        assertThat(dictionaryReplacer.replace("$temp$", Map.of("temp", "temporary"))).isEqualTo("temporary");
     }
 
 }
