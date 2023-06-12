@@ -21,10 +21,10 @@ public class StringCalulatorTest {
     }
 
     @Test
-    void threeNumbersOrMoreWillTHrowsException() {
-        assertThatThrownBy(() -> new StringCalulator().add("1.1,2.2,3.3")).isInstanceOf(StringCalulatorException.class);
-        assertThatThrownBy(() -> new StringCalulator().add("1.1,2.2,3.3,4.4")).isInstanceOf(StringCalulatorException.class);
-        assertThatThrownBy(() -> new StringCalulator().add("1.1,2.2,3.3,4.4,5.5")).isInstanceOf(StringCalulatorException.class);
+    void threeNumbersOrMoreWillWorks() {
+        assertThat(new StringCalulator().add("1.1,2.2,3.3")).isEqualTo("6.6");
+        assertThat(new StringCalulator().add("1.1,2.2,3.3,4.4")).isEqualTo("10.10");
+        assertThat(new StringCalulator().add("1.1,2.2,3.3,4.4,5.5")).isEqualTo("15.15");
     }
 
 

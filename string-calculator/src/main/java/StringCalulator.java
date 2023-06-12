@@ -10,13 +10,7 @@ public class StringCalulator {
             return "0";
         }
 
-        List<String> inputList = Arrays.asList(input.split(","));
-
-        if (inputList.size() > 3) {
-            throw new StringCalulatorException();
-        }
-
-        return inputList.stream()
+        return Arrays.stream(input.split(","))
                 .map(BigDecimal::new)
                 .reduce(BigDecimal.ZERO, BigDecimal::add)
                 .toPlainString();
