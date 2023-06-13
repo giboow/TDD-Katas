@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 public class StringCalulator {
 
-    final String regex = "^((\\d+\\.?\\d*([,\\n])?)*)";
+    final String regex = "(^(?:\\d*\\.?\\d+(?:,|\\n)?)*$)";
 
     public String add(String input) throws StringCalulatorException {
         if (StringUtils.isEmpty(input)) {
@@ -33,7 +33,12 @@ public class StringCalulator {
         int matchLenght = matcher.find() ? matcher.group(1).length() : 0;
         if (matchLenght != input.length()) {
             String charFound = input.substring(matchLenght, matchLenght + 1);
-            throw new StringCalulatorException(MessageFormat.format("Number expected but ''{0}'' found at position {1}.", charFound, matchLenght));
+            if(matchLenght == (input.length() - 1) && (charFound.equals(",") || charFound.equals("\n"))) {
+                throw new StringCalulatorException(MessageFormat.format("Number expected but EOF found.", charFound, matchLenght));
+            } else {
+                throw new StringCalulatorException(MessageFormat.format("Number expected but ''{0}'' found at position {1}.", charFound, matchLenght));
+
+            }
         }
     }
 }

@@ -46,5 +46,16 @@ public class StringCalulatorTest {
                 .hasMessage("Number expected but 'a' found at position 0.");
     }
 
+    @Test
+    void missingNumberInLastPosition() {
+        assertThatThrownBy(() -> new StringCalulator().add("1,3,"))
+                .isInstanceOf(StringCalulatorException.class)
+                .hasMessage("Number expected but EOF found.");
+
+        assertThatThrownBy(() -> new StringCalulator().add("1,3\n"))
+                .isInstanceOf(StringCalulatorException.class)
+                .hasMessage("Number expected but EOF found.");
+    }
+
 
 }
