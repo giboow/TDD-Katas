@@ -23,8 +23,27 @@ public class StringCalulatorTest {
     @Test
     void threeNumbersOrMoreWillWorks() {
         assertThat(new StringCalulator().add("1.1,2.2,3.3")).isEqualTo("6.6");
-        assertThat(new StringCalulator().add("1.1,2.2,3.3,4.4")).isEqualTo("10.10");
-        assertThat(new StringCalulator().add("1.1,2.2,3.3,4.4,5.5")).isEqualTo("15.15");
+        assertThat(new StringCalulator().add("1.1,2.2,3.3,4.4")).isEqualTo("11.0");
+        assertThat(new StringCalulator().add("1.1,2.2,3.3,4.4,5.5")).isEqualTo("16.5");
+    }
+
+    @Test
+    void newLineIsASeparator() {
+        assertThat(new StringCalulator().add("1\n2,3")).isEqualTo("6");
+    }
+
+    @Test
+    void newLineAfterCommaWillThrowError() {
+        assertThatThrownBy(() -> new StringCalulator().add("175.2,\n35"))
+                .isInstanceOf(StringCalulatorException.class)
+                .hasMessage("Number expected but '\n' found at position 6.");
+    }
+
+    @Test
+    void invalidInputAtStartWillThrowError() {
+        assertThatThrownBy(() -> new StringCalulator().add("a1234,678"))
+                .isInstanceOf(StringCalulatorException.class)
+                .hasMessage("Number expected but 'a' found at position 0.");
     }
 
 
