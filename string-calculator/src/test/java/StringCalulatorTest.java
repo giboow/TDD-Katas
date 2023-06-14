@@ -36,7 +36,7 @@ public class StringCalulatorTest {
     void newLineAfterCommaWillThrowError() {
         assertThatThrownBy(() -> new StringCalulator().add("175.2,\n35"))
                 .isInstanceOf(StringCalulatorException.class)
-                .hasMessage("Number expected but '\n' found at position 6.");
+                .hasMessage("Number expected but ',' found at position 5.");
     }
 
     @Test
